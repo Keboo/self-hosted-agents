@@ -23,3 +23,10 @@ tags = {
   ManagedBy   = "terraform"
   Owner       = "your-team"
 }
+
+# Backend configuration (uncomment and configure for remote state)
+# These should be set as environment variables in CI/CD or in terraform.tfvars
+# resource_group_name_backend  = "rg-terraform-state"
+# storage_account_name_backend = "stterraformstate12345"
+# container_name_backend       = "tfstate"
+# key_backend                  = "github-runners.terraform.tfstate"
