@@ -1,0 +1,32 @@
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and modify as needed
+
+# Azure region where resources will be created
+location = "East US"
+
+# Resource group name
+resource_group_name = "rg-github-runners"
+
+# Container App Environment name
+container_app_environment_name = "cae-github-runners"
+
+# Azure Container Registry name (must be globally unique)
+container_registry_name = "acrgithubrunners123"
+
+# User Assigned Managed Identity name
+user_assigned_identity_name = "mi-github-runners"
+
+# Tags to apply to all resources
+tags = {
+  Environment = "dev"
+  Purpose     = "github-runners"
+  ManagedBy   = "terraform"
+  Owner       = "your-team"
+}
+
+# Backend configuration (uncomment and configure for remote state)
+# These should be set as environment variables in CI/CD or in terraform.tfvars
+# resource_group_name_backend  = "rg-terraform-state"
+# storage_account_name_backend = "stterraformstate12345"
+# container_name_backend       = "tfstate"
+# key_backend                  = "github-runners.terraform.tfstate"
