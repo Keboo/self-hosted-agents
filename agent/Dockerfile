@@ -36,7 +36,7 @@ RUN useradd -m -s /bin/bash runner \
     && echo 'runner ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Download and install GitHub Actions Runner
-ARG RUNNER_VERSION=2.313.0
+ARG RUNNER_VERSION=2.325.0
 RUN mkdir -p /home/runner/actions-runner \
     && cd /home/runner/actions-runner \
     && curl -o actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
@@ -54,5 +54,8 @@ WORKDIR /home/runner/actions-runner
 # Copy entrypoint script
 COPY --chown=runner:runner entrypoint.sh /home/runner/entrypoint.sh
 RUN chmod +x /home/runner/entrypoint.sh
+
+# Ensure Unix-style line endings for entrypoint.sh
+RUN sed -i 's/\r$//' /home/runner/entrypoint.sh
 
 ENTRYPOINT ["/home/runner/entrypoint.sh"]

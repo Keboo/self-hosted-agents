@@ -1,3 +1,5 @@
+# Run this to get a default repository setup.
+
 # Disable merge commits
 gh repo edit --enable-merge-commit=false
 #Enable auto merge

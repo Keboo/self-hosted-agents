@@ -5,14 +5,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Dockerfile'
-      - 'entrypoint.sh'
+      - 'agent/**'
       - '.github/workflows/build-runner-image.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'Dockerfile'
-      - 'entrypoint.sh'
+      - 'agent/**'
       - '.github/workflows/build-runner-image.yml'
   workflow_dispatch:
 
@@ -55,8 +53,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./agent
+          file: ./agent/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
