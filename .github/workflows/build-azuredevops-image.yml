@@ -1,22 +1,22 @@
 ---
-name: Build GitHub Actions Runner Image
+name: Build Azure DevOps Agent Image
 
 on:
   push:
     branches: [main]
     paths:
-      - 'agent/github/**'
-      - '.github/workflows/build-runner-image.yml'
+      - 'agent/azuredevops/**'
+      - '.github/workflows/build-azuredevops-image.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'agent/github/**'
-      - '.github/workflows/build-runner-image.yml'
+      - 'agent/azuredevops/**'
+      - '.github/workflows/build-azuredevops-image.yml'
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/github-runner
+  IMAGE_NAME: ${{ github.repository }}/azuredevops-agent
 
 jobs:
   build:
@@ -52,8 +52,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./agent/github
-          file: ./agent/github/Dockerfile
+          context: ./agent/azuredevops
+          file: ./agent/azuredevops/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
