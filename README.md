@@ -1,18 +1,19 @@
 # self-hosted-agents
 
-Infrastructure and tooling for deploying self-hosted GitHub Actions runners on Azure Container Apps.
+Infrastructure and tooling for deploying self-hosted GitHub Actions runners and Azure DevOps agents on Azure Container Apps.
 
 ## Overview
 
 This repository provides:
 - Terraform infrastructure for Azure Container Apps environment
 - Docker image for GitHub Actions self-hosted runners
+- Docker image for Azure DevOps self-hosted agents
 - CI/CD pipeline for building and publishing runner images
 - **Automated Terraform deployment pipeline**
 
 ## Components
 
-### Terraform Infrastructure (`github/` folder)
+### Terraform Infrastructure (`infra/` folder)
 
 Creates the following Azure resources:
 - **Resource Group** - Container for all resources
@@ -21,12 +22,20 @@ Creates the following Azure resources:
 - **User Assigned Managed Identity** - For secure access to ACR
 - **Log Analytics Workspace** - For monitoring and logging
 
-### GitHub Actions Runner Image
+### GitHub Actions Runner Image (`agent/github/`)
 
 - Based on Ubuntu 22.04 (matching GitHub's runner images)
 - Includes Docker CLI and Azure CLI
 - Configurable runner labels and settings
 - Automatic registration and cleanup
+
+### Azure DevOps Agent Image (`agent/azuredevops/`)
+
+- Based on Ubuntu 22.04 (matching Azure DevOps hosted agent images)
+- Includes Azure CLI and common build tools
+- Configurable agent pool and settings
+- Automatic registration and cleanup
+- Follows Microsoft's recommended configuration
 
 ### CI/CD Pipelines
 
