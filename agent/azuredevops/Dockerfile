@@ -28,10 +28,8 @@ RUN apt-get update && apt-get install -y \
 #     && apt-get install -y docker-ce-cli \
 #     && rm -rf /var/lib/apt/lists/*
 
-# Install Azure CLI - commented out due to network restrictions in CI
-# In production environments, Azure CLI can be installed using:
-# RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-# For now, skip Azure CLI installation to avoid build failures
+# Install Azure CLI
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 # Create a user for the agent
 RUN useradd -m -s /bin/bash azureuser \
